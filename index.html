@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+   <title>Document</title>
+   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #cdaa39, #f83d09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,20,0.1);
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+}
+.container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+
+h1 {
+  color: #e04141;
+  text-align: center;
+  font-size: 36px;
+  text-shadow: 2px 2px 4px #00000033;
+}
+
+
+
+
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+}
+p{
+    font-size: 18px;
+}
+label{
+    font-size: 15px;
+}
+
+
+#calc {
+  width: 100%;
+  padding: 12px;
+  background: #66a6ff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#calc:hover {
+  background: #4a90e2;
+}
+
+
+#result {
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  
+  
+}
+
+   </style>
+   
+</head>
+<body>
+    
+<center><div class="container">
+<h1>BMI calculator</h1>
+<form>
+<p><label>height in cm:</label><input type="text"     id="height"/></p>
+<p><label>weight in kg:</label><input type="text"     id="weight"/></p>
+<button id="calc">calculate</button>
+<div id="results"></div>
+<div id="weight-guide">
+<h3>BMI weight guide</h3>
+<p>under weight = less than 18.6</p>
+<p>normal range =  18.6 and 24.9</p>
+<p>overweight = greater than 24.9</p>
+
+</div>
+
+</form>
+
+
+
+</div>
+</center>
+
+
+
+<script>
+const form=document.querySelector('form')
+const head=document.querySelector('h1')
+
+
+head.style.transition="transform 0.9s ease, color 1s ease";
+
+head.addEventListener("mouseenter", function () {
+  head.innerHTML = "Body Mass Index (BMI) is a number that helps determine whether a person has a healthy body weight for their height.";
+ head.style.transform = "scale(1.2)";
+    head.style.color="blue"
+
+});
+
+head.addEventListener("mouseleave", function () {
+  head.innerHTML = "BMI calculator"; // or original color
+    head.style.transform = "scale(1)";
+    head.style.color = "black";
+});
+
+form.addEventListener('submit',function(e){
+e.preventDefault()
+
+const height=parseInt(document.querySelector('#height').value)
+const weight=parseInt(document.querySelector('#weight').value)
+const results=document.querySelector('#results')
+
+if(height === '' || height < 0 || isNaN(height)){
+results.innerHTML=`please give a valid height ${height}`
+}else if
+(weight === '' || weight < 0 || isNaN(weight)){
+results.innerHTML=`please give a valid weight ${weight}`
+}
+
+else{
+    const BMI=(weight / ((height * height) / 10000)).toFixed(2);
+    //show result
+   
+   if(BMI<18.6){
+    message="you are underweight"
+    results.style.color="blue"
+    
+   }
+   else if(BMI>=18.6 && BMI<=24.9){
+    message="you are normal range"
+    results.style.color="green"
+   }
+   else{
+    message="you are overweight"
+    results.style.color="red"
+   }
+
+    results.innerHTML=`<span>Your BMI is ${BMI} .${message}</span>`
+}
+
+})
+
+
+</script>
+
+</body>
+</html>
